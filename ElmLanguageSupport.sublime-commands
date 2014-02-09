@@ -1,0 +1,14 @@
+[
+	{
+        "caption": "Elm Language Support: Show type",
+        "command": "elm_show_type"
+    },
+	{
+        "caption": "Elm Language Support: Install Path Utility",
+        "command": "elm_install_path_utility"
+    },
+    {
+    	"caption": "Elm Language Support: Set Docs Path",
+    	"command": "elm_set_docs_path"
+    }
+]
