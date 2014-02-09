@@ -10,38 +10,6 @@ SETTINGS = sublime.load_settings('ElmLanguageSupport.sublime-settings')
 
 ELM_DOCS_PATH = SETTINGS.get('elm_docs_path')
 
-class ElmPathsInstaller(threading.Thread):
-    """
-    Handler to install the elm-paths utility
-    """
-    def run(self):
-        import tempfile
-
-        cwd = os.getcwd()
-
-        # Makes a temporary directory for the git project
-        sys_temp = tempfile.gettempdir()
-        temp_dir = os.path.join(sys_temp, 'elmpaths')
-        if not os.path.exists(temp_dir):
-            os.makedirs(temp_dir)
-
-        os.chdir(temp_dir)
-
-        print 'Cloning ElmPaths project...'
-        p = subprocess.Popen('git clone https://github.com/deadfoxygrandpa/ElmPaths.git', 
-            stdout=subprocess.PIPE, shell=True)
-        print p.communicate()[0]
-
-        os.chdir('ElmPaths')
-
-        print 'Installing elm-paths...'
-        p = subprocess.Popen('cabal install', stdout=subprocess.PIPE, shell=True)
-        print p.communicate()[0]
-
-        os.chdir(cwd)
-
-        print 'elm-paths installed.'
-
 
 class Module(object):
     """
@@ -234,11 +202,6 @@ class ElmLanguageSupport(sublime_plugin.EventListener):
 class ElmShowType(sublime_plugin.TextCommand):
     def run(self, edit):
         print get_type(self.view)
-
-class ElmInstallPathUtility(sublime_plugin.ApplicationCommand):
-    def run(self):
-        thread = ElmPathsInstaller()
-        thread.start()
 
 class ElmSetDocsPath(sublime_plugin.ApplicationCommand):
     def run(self):
