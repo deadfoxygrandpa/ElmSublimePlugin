@@ -28,7 +28,7 @@
                                     "file": "${packages}/User/ElmLanguageSupport.sublime-settings"
                                 },
                                 "caption": "Settings – User"
-                            },
+                            }
                         ]
                     }
                 ]
