@@ -248,8 +248,18 @@ class ElmSetDocsPath(sublime_plugin.ApplicationCommand):
             SETTINGS.set('elm_docs_path', version)
         print version or 'elm-paths not installed...'
 
+class ElmEnable(sublime_plugin.ApplicationCommand):
+    def run(self):
+        SETTINGS.set("enabled", "true")
+
+class ElmDisable(sublime_plugin.ApplicationCommand):
+    def run(self):
+        SETTINGS.set("enabled", "false")                
+
 
 if SETTINGS.get('enabled'):
+    global MODULES
+    global PRELUDE
     # Load the modules from the Elm Standard Library docs
     MODULES = [Module(m) for m in load_docs(ELM_DOCS_PATH)]
     PRELUDE = get_prelude_modules(MODULES)
